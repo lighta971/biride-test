@@ -29,7 +29,6 @@ export const eventTypes = [
   "toilet_visit_recorded",
 ] as const;
 
-//  medication | food and fluid | visit | observation | hygien | check in/out | alert/concern
 export const moods = ["okay", "happy", "sad"] as const;
 
 export type CareRecipientEventType = typeof eventTypes[number];

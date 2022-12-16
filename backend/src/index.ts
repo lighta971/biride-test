@@ -1,4 +1,7 @@
-import app from './application';
+import dotenv = require("dotenv");
+dotenv.config();
+
+import app from "./http/application";
 
 const port = process.env.PORT || 8000;
 

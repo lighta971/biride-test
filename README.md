@@ -1,3 +1,7 @@
+# Preview result
+
+![Demo](https://github.com/lighta971/birdie-test/blob/master/preview.png?raw=true)
+
 # Birdie Developer Test
 
 We would like to thank you for taking our developer test. We understand that candidates will often have many of these tests to complete, therefore we think it's important to cut straight to the important stuff.

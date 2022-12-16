@@ -1,8 +1,7 @@
-import { CareRecipientEvent } from "../CareRecipientEvent/CareRecipientEvent";
-
-export const moods = ["okay", "happy", "sad"] as const;
-
-export type Mood = typeof moods[number];
+import {
+  CareRecipientEvent,
+  CareRecipientMood,
+} from "../CareRecipientEvent/CareRecipientEvent";
 
 export type JournalEntryEventTypes =
   | "observedMood"
@@ -23,7 +22,7 @@ export type JournalEntryJson = {
   hadAlertOrConcern: boolean; // alert_raised - concern_raised
   checkedIn: boolean; // check_in
   checkedOut: boolean; // check_out
-  observedMood: Mood | null; // mood_observation
+  observedMood: CareRecipientMood | null; // mood_observation
 };
 
 export class CareRecipientJournalEntry {
@@ -81,7 +80,7 @@ export class CareRecipientJournalEntry {
     return this.#events.some((event) => event.eventType === "check_out");
   }
 
-  get observedMood(): Mood | null {
+  get observedMood(): CareRecipientMood | null {
     return (
       this.#events.find((event) => event.eventType === "mood_observation")
         ?.mood || null

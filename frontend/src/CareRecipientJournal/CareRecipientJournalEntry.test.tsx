@@ -11,7 +11,7 @@ describe('CareRecipientJournalEntry', () => {
     render(<CareRecipientJournalEntry journalEntry={journalEntry} />)
 
     // assert
-    expect(screen.getByText(/Your parents have had visitors today/)).toBeInTheDocument()
+    expect(screen.getByText(/Your parent have had visitors today/)).toBeInTheDocument()
   })
   it('does not render EventEntryDescription and display message when there is no events', () => {
     // arrange

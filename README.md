@@ -1,6 +1,6 @@
 # Preview result
 
-![Demo](https://github.com/lighta971/birdie-test/blob/master/preview.png?raw=true)
+![Demo](https://raw.githubusercontent.com/lighta971/biride-test/master/preview.png)
 
 # Birdie Developer Test
 

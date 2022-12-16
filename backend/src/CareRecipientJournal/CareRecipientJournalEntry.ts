@@ -14,7 +14,7 @@ export type JournalEntryEventTypes =
   | "checkedIn"
   | "checkedOut";
 
-export type JournalEntryObject = {
+export type JournalEntryJson = {
   date: string;
   hadVisit: boolean; // visit_completed
   hadObservations: boolean; // all observations
@@ -88,7 +88,7 @@ export class CareRecipientJournalEntry {
     );
   }
 
-  toArray(): JournalEntryObject {
+  toJson(): JournalEntryJson {
     return {
       date: this.date,
       hadVisit: this.hadVisit,

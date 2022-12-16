@@ -1,7 +1,7 @@
 import { CareRecipientEvent } from "../CareRecipientEvent/CareRecipientEvent";
 import {
   CareRecipientJournalEntry,
-  JournalEntryObject,
+  JournalEntryJson,
 } from "./CareRecipientJournalEntry";
 
 describe("Care recipient journal entry", () => {
@@ -38,7 +38,7 @@ describe("Care recipient journal entry", () => {
       );
 
       // act
-      const actual = new CareRecipientJournalEntry("foo", events).toArray();
+      const actual = new CareRecipientJournalEntry("foo", events).toJson();
 
       // assert
       expect(actual).toStrictEqual(
@@ -51,8 +51,8 @@ describe("Care recipient journal entry", () => {
 });
 
 function createEntryObject(
-  overrides: Partial<JournalEntryObject>
-): JournalEntryObject {
+  overrides: Partial<JournalEntryJson>
+): JournalEntryJson {
   return {
     date: "foo",
     hadVisit: false,

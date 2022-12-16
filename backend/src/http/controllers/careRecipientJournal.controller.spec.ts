@@ -35,7 +35,7 @@ describe("care recipient journal", () => {
       careRecipientId
     );
     expect(response.json).toHaveBeenCalledWith({
-      data: journal.map((entry) => entry.toArray()),
+      data: journal.map((entry) => entry.toJson()),
     });
     expect(response.status).toHaveBeenCalledWith(200);
   });

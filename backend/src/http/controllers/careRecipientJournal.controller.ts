@@ -9,6 +9,6 @@ export function getCareRecipientJournal(req: Request, res: Response): void {
   void journalService
     .getJournalForCareRecipientId(req.params.careRecipientId)
     .then((journal) => {
-      res.status(200).json({ data: journal.map((entry) => entry.toArray()) });
+      res.status(200).json({ data: journal.map((entry) => entry.toJson()) });
     });
 }

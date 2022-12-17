@@ -1,36 +1,70 @@
 import { render, screen } from '@testing-library/react'
 import CareRecipientJournal from './CareRecipientJournal'
-import { useFetchCareRecipientJournal } from './useFetchCareRecipientJournal'
+import {
+  useFetchCareRecipientJournal,
+  UseFetchJournalEntriesState,
+} from './useFetchCareRecipientJournal'
+import CareRecipientJournalEntry from './CareRecipientJournalEntry'
+
 import { JournalEntry } from './JournalEntry'
 
+jest.mock('./CareRecipientJournalEntry')
 jest.mock('./useFetchCareRecipientJournal')
-const mockedUseFetchJournalEntries = useFetchCareRecipientJournal as jest.MockedFunction<
-  typeof useFetchCareRecipientJournal
->
 
 describe('CareRecipientJournal', () => {
-  it('renders with 2 entries', () => {
+  it('renders 2 JournalEntryComponent when api returns 2 entries', () => {
     // arrange
-    const journalEntries: JournalEntry[] = [
-      {
-        date: '2020-01-01',
-        observedMood: null,
-      } as JournalEntry,
-      {
-        date: '2022-01-01',
-        observedMood: null,
-      } as JournalEntry,
-    ]
-
-    mockedUseFetchJournalEntries.mockReturnValue({ journalEntries, error: null, loading: false })
-
+    const journalEntries = createJournalEntries()
     const careRecipientId = 'foo'
+
+    const mockedUseFetchJournalEntries = mockUseFetchJournalEntries({
+      journalEntries,
+      error: null,
+      loading: false,
+    })
+    mockCareRecipientJournalEntryComponent()
 
     // act
     render(<CareRecipientJournal careRecipientId={careRecipientId} />)
 
     // assert
-    expect(screen.getAllByRole('article')).toHaveLength(2)
+    expect(screen.queryAllByTestId('journal-entry')).toHaveLength(2)
     expect(mockedUseFetchJournalEntries).toHaveBeenCalledWith(careRecipientId)
   })
+
+  // it('renders loading indicator', () => {})
+  // it('renders empty result message', () => {})
 })
+
+function mockCareRecipientJournalEntryComponent(): void {
+  const MockedCareRecipientJournalEntry = CareRecipientJournalEntry as jest.MockedFunction<
+    typeof CareRecipientJournalEntry
+  >
+  MockedCareRecipientJournalEntry.mockReturnValue(
+    <div data-testid="journal-entry">journal-entry</div>,
+  )
+}
+
+function mockUseFetchJournalEntries(
+  givenState: UseFetchJournalEntriesState,
+): jest.MockedFunction<typeof useFetchCareRecipientJournal> {
+  const mockedUseFetchJournalEntries = useFetchCareRecipientJournal as jest.MockedFunction<
+    typeof useFetchCareRecipientJournal
+  >
+  mockedUseFetchJournalEntries.mockReturnValue(givenState)
+
+  return mockedUseFetchJournalEntries
+}
+
+function createJournalEntries(): JournalEntry[] {
+  return [
+    {
+      date: '2020-01-01',
+      observedMood: null,
+    } as JournalEntry,
+    {
+      date: '2022-01-01',
+      observedMood: null,
+    } as JournalEntry,
+  ]
+}

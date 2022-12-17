@@ -9,7 +9,7 @@ export default function CareRecipientJournalEntry(
   const eventTypes = getEventTypesFromEntry(props.journalEntry)
 
   return (
-    <Fragment>
+    <>
       <h3>{new Date(props.journalEntry.date).toDateString()}</h3>
       <Stack spacing={2}>
         {eventTypes.map((type) => {
@@ -21,7 +21,7 @@ export default function CareRecipientJournalEntry(
           </Typography>
         )}
       </Stack>
-    </Fragment>
+    </>
   )
 }
 

@@ -24,7 +24,7 @@ export function useFetchCareRecipientJournal(careRecipientId: string): UseFetchJ
 }
 
 // could be added loading and error state
-type UseFetchJournalEntriesState = {
+export type UseFetchJournalEntriesState = {
   journalEntries: JournalEntry[]
   error: unknown
   loading: boolean

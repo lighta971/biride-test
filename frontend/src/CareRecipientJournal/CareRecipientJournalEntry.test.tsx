@@ -9,13 +9,14 @@ describe('CareRecipientJournalEntry', () => {
   it('renders EventTypeDescription when there is an event', () => {
     // arrange
     const journalEntry = createJournalEntry({ hadVisit: true })
-    mockEventTypeDescriptionComponent()
+    const mockedEventTypeDescription = mockEventTypeDescriptionComponent()
 
     // act
     render(<CareRecipientJournalEntry journalEntry={journalEntry} />)
 
     // assert
     expect(screen.queryAllByTestId('event-type-description')).toHaveLength(1)
+    expect(mockedEventTypeDescription).toHaveBeenCalledWith({ journalEntry, type: 'hadVisit' }, {})
   })
   it('does not render EventEntryDescription and display message when there is no event', () => {
     // arrange
@@ -46,10 +47,11 @@ function createJournalEntry(entry: Partial<JournalEntry> = {}): JournalEntry {
   }
 }
 
-function mockEventTypeDescriptionComponent(): void {
-  const MockedEventTypeDescription = EventTypeDescription as jest.MockedFunction<
-    typeof EventTypeDescription
-  >
+type EventTypeDescriptionMock = jest.MockedFunction<typeof EventTypeDescription>
+function mockEventTypeDescriptionComponent(): EventTypeDescriptionMock {
+  const MockedEventTypeDescription = EventTypeDescription as EventTypeDescriptionMock
 
   MockedEventTypeDescription.mockReturnValue(<div data-testid="event-type-description"></div>)
+
+  return MockedEventTypeDescription
 }
